@@ -13,7 +13,7 @@
 
 #include "solong.h"
 
-int ft_cookiz(t_data *data)
+int ft_cookiz(char **map)
 {
     int i;
     int j;
@@ -22,11 +22,11 @@ int ft_cookiz(t_data *data)
     i = 0;
     j = 0;
     c = 0;
-    while (data->map[i])
+    while (map[i])
     {
-        while(data->map[i][j])
+        while(map[i][j])
         {
-            if (data->map[i][j] == 'C')
+            if (map[i][j] == 'C')
                 c++;
             j++;
         }

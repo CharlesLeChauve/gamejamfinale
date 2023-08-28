@@ -12,55 +12,55 @@
 
 #include "solong.h"
 
-void	move_left(t_data *data)
+int	move_left(t_data *data)
 {
     if (data->map[data->player.posy][data->player.posx - 1] != '1')   
 	{
         data->map[data->player.posy][data->player.posx] = '0';
         data->map[data->player.posy][data->player.posx - 1] = 'P';
         data->player.posx--;
-        return;
+        return (1);
     }
     else
-        return;
+        return (0);
 }
 
-void	move_right(t_data *data)
+int	move_right(t_data *data)
 {
     if (data->map[data->player.posy][data->player.posx + 1] != '1')    
 	{
         data->map[data->player.posy][data->player.posx] = '0';
         data->map[data->player.posy][data->player.posx + 1] = 'P';
         data->player.posx++;
-        return;
+        return (1);
     }
     else
-	    return;
+	    return (0);
 }
 
-void	move_up(t_data *data)
+int	move_up(t_data *data)
 {
     if (data->map[data->player.posy - 1][data->player.posx] != '1')    
 	{
         data->map[data->player.posy][data->player.posx] = '0';
         data->map[data->player.posy - 1][data->player.posx] = 'P';
         data->player.posy--;
-        return;
+        return (1);
     }
     else
-	    return;
+	    return (0);
 }
 
-void	move_down(t_data *data)
+int	move_down(t_data *data)
 {
     if (data->map[data->player.posy + 1][data->player.posx] != '1')    
 	{
         data->map[data->player.posy][data->player.posx] = '0';
         data->map[data->player.posy + 1][data->player.posx] = 'P';
         data->player.posy++;
-        return;
+        return (1);
     }
     else
-	    return;
+	    return (0);
 }
 

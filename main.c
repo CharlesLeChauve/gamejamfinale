@@ -13,8 +13,6 @@
 #include "solong.h"
 
 
-
-
 int	ft_searchar(char *str, char c)
 {
 	int	i;
@@ -85,24 +83,27 @@ int	handle_no_event(void *data)
 int	handle_input(int keysym, t_data *data)
 {
 	int i;
+	int	m;
 
+	m = 0;
     if (keysym == XK_a)
-        move_left(data);
+        m = m + move_left(data);
 	if (keysym == XK_s)
-        move_down(data);
+        m = m + move_down(data);
 	if (keysym == XK_w)
-        move_up(data);
+        m = m + move_up(data);
 	if (keysym == XK_d)
-        move_right(data);
+        m = m + move_right(data);
 	if (keysym == XK_Escape)
         mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	i = 0;
 	while (data->map[i])
 	{
 		ft_printf("%s\n", data->map[i]);
-		//ft_printf("%d\n", ft_cookiz(data));
 		i++;
 	}
+	ft_printf("%d\n", ft_cookiz(data->map));
+	ft_printf("%d\n", m);
 	
     return (0);
 }
@@ -127,11 +128,14 @@ int main()
 
 	fd = open("test.ber", O_RDONLY);
 	data.map = ft_maping(fd);
+	if (ft_errmsg(data.map))
+		return (0);
 	while (data.map[i])
 	{
 		ft_printf("%s\n", data.map[i]);
 		i++;
 	}
+
 	data.player = ft_searstruct(data.map, 'P');
 	ft_printf("x = %d\ny = %d\n", data.player.posx, data.player.posy);
 	mlx_loop_hook(data.win_ptr, &handle_no_event, &data);
