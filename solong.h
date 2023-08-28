@@ -46,6 +46,12 @@ typedef struct s_map
 
 char	*get_str(int fd);
 char	**ft_maping(int fd);
+void	move_left(t_data *data);
+void	move_right(t_data *data);
+void	move_up(t_data *data);
+void	move_down(t_data *data);
+int		ft_cookiz(t_data *data);
+
 
 
 #endif

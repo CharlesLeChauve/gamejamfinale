@@ -15,7 +15,7 @@ MINILIB = ./minilibx-linux/libmlx_Linux.a ./minilibx-linux/libmlx.a
 
 #MINILIB2 = ./minilibx-linux/libmlx.a
 
-SRCS = main.c 
+SRCS = main.c mouvements.c check_cookiz.c
 
 CC = gcc
 

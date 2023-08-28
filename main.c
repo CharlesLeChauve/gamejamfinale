@@ -12,12 +12,8 @@
 
 #include "solong.h"
 
-void	move_left(t_data *data)
-{
-	data->map[data->player.posy][data->player.posx] = '0';
-	data->map[data->player.posy][data->player.posx - 1] = 'P';
-	return;
-}
+
+
 
 int	ft_searchar(char *str, char c)
 {
@@ -88,8 +84,26 @@ int	handle_no_event(void *data)
 
 int	handle_input(int keysym, t_data *data)
 {
-    if (keysym == XK_A)
+	int i;
+
+    if (keysym == XK_a)
         move_left(data);
+	if (keysym == XK_s)
+        move_down(data);
+	if (keysym == XK_w)
+        move_up(data);
+	if (keysym == XK_d)
+        move_right(data);
+	if (keysym == XK_Escape)
+        mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	i = 0;
+	while (data->map[i])
+	{
+		ft_printf("%s\n", data->map[i]);
+		//ft_printf("%d\n", ft_cookiz(data));
+		i++;
+	}
+	
     return (0);
 }
 
