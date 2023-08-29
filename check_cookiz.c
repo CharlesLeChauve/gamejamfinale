@@ -35,3 +35,11 @@ int ft_cookiz(char **map)
     }
     return(c);
 }
+
+int    ft_endgame(t_data *data)
+{
+    if ((data->player.posy == data->exit.posy) && (data->player.posx == data->exit.posx) && (ft_cookiz(data->map) == 0))
+        return (1);
+    else
+        return (0);
+}

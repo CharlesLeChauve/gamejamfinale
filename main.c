@@ -12,7 +12,6 @@
 
 #include "solong.h"
 
-
 int	ft_searchar(char *str, char c)
 {
 	int	i;
@@ -26,6 +25,7 @@ int	ft_searchar(char *str, char c)
 	}
 	return (-1);
 }
+
 t_player	ft_searstruct(char **map, char c)
 {
 	t_player	cacahuete;
@@ -39,7 +39,6 @@ t_player	ft_searstruct(char **map, char c)
 	}
 	cacahuete.posy--;
 	return (cacahuete);
-
 }
 
 char	*get_str(int fd)
@@ -74,26 +73,24 @@ char	**ft_maping(int fd)
 	return (map);
 }
 
-int	handle_no_event(void *data)
-{
+//int	handle_no_event(void *data)
+//{
     /* This function needs to exist, but it is useless for the moment */
-	return(0);
-}
+//	return(0);
+//}
 
 int	handle_input(int keysym, t_data *data)
 {
 	int i;
-	int	m;
 
-	m = 0;
     if (keysym == XK_a)
-        m = m + move_left(data);
+        move_left(data);
 	if (keysym == XK_s)
-        m = m + move_down(data);
+        move_down(data);
 	if (keysym == XK_w)
-        m = m + move_up(data);
+        move_up(data);
 	if (keysym == XK_d)
-        m = m + move_right(data);
+        move_right(data);
 	if (keysym == XK_Escape)
         mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	i = 0;
@@ -102,16 +99,17 @@ int	handle_input(int keysym, t_data *data)
 		ft_printf("%s\n", data->map[i]);
 		i++;
 	}
-	ft_printf("%d\n", ft_cookiz(data->map));
-	ft_printf("%d\n", m);
-	
+	if (ft_endgame(data) == 1)
+	{
+		ft_printf("Congatulations fdp !\n");
+		exit(EXIT_SUCCESS);
+	}
     return (0);
 }
 
 int main()
 {
 	int i = 0;
-	//char **map;
 	int fd;
 	t_data data;
 
@@ -125,7 +123,6 @@ int main()
         free(data.win_ptr);
         return (1);
     }
-
 	fd = open("test.ber", O_RDONLY);
 	data.map = ft_maping(fd);
 	if (ft_errmsg(data.map))
@@ -135,12 +132,10 @@ int main()
 		ft_printf("%s\n", data.map[i]);
 		i++;
 	}
-
 	data.player = ft_searstruct(data.map, 'P');
-	ft_printf("x = %d\ny = %d\n", data.player.posx, data.player.posy);
-	mlx_loop_hook(data.win_ptr, &handle_no_event, &data);
+	data.exit = ft_searstruct(data.map, 'E');
 	mlx_key_hook(data.win_ptr, &handle_input, &data);
-	//free(map);
+	//free(data.map);
 	mlx_loop(data.mlx_ptr);
 	return (0);
 }

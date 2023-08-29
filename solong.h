@@ -35,6 +35,7 @@ typedef struct s_data
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_player 	player;
+	t_player	exit;
 	char		**map;
 }	t_data;
 
