@@ -48,14 +48,12 @@ char	*get_str(int fd)
 	char	*str;
 	
 	buff = "";
-	str = malloc(sizeof(char) * 10);
-	a = read(fd, str, 10);
-	buff = ft_strjoin(buff, str);
-	free(str);
-	while (a >= 10)
+	a = 10000;
+	while (a >= 10000)
 	{
-		str = malloc(sizeof(char) * 10);
-		a = read(fd, str, 10);
+		str = malloc(sizeof(char) * 10000);
+		a = read(fd, str, 10000);
+		str[a] = '\0';
 		buff = ft_strjoin(buff, str);
 		free(str);
 	}
@@ -73,6 +71,19 @@ char	**ft_maping(int fd)
 	return (map);
 }
 
+void ft_freetabtab(char **map)
+{
+	int	i;
+
+	i = 0;
+	while(map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
+}
+
 //int	handle_no_event(void *data)
 //{
     /* This function needs to exist, but it is useless for the moment */
@@ -83,6 +94,7 @@ int	handle_input(int keysym, t_data *data)
 {
 	int i;
 
+	i = 0;
     if (keysym == XK_a)
         move_left(data);
 	if (keysym == XK_s)
@@ -90,18 +102,20 @@ int	handle_input(int keysym, t_data *data)
 	if (keysym == XK_w)
         move_up(data);
 	if (keysym == XK_d)
-        move_right(data);
-	if (keysym == XK_Escape)
-        mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	i = 0;
+        move_right(data);    
 	while (data->map[i])
 	{
 		ft_printf("%s\n", data->map[i]);
 		i++;
 	}
-	if (ft_endgame(data) == 1)
+	if (ft_endgame(data) == 1 || keysym == XK_Escape)
 	{
-		ft_printf("Congatulations fdp !\n");
+		if (ft_endgame(data) == 1)
+			ft_printf("!!! YOU WIN !!!\nCongatulations fdp !\n");
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		mlx_destroy_display(data->mlx_ptr);
+		free(data->mlx_ptr);
+		ft_freetabtab(data->map);
 		exit(EXIT_SUCCESS);
 	}
     return (0);
@@ -109,7 +123,7 @@ int	handle_input(int keysym, t_data *data)
 
 int main()
 {
-	int i = 0;
+	//int i = 0;
 	int fd;
 	t_data data;
 
@@ -126,12 +140,17 @@ int main()
 	fd = open("test.ber", O_RDONLY);
 	data.map = ft_maping(fd);
 	if (ft_errmsg(data.map))
+	{
+		ft_freetabtab(data.map);
 		return (0);
+	}
+	/*
 	while (data.map[i])
 	{
 		ft_printf("%s\n", data.map[i]);
 		i++;
 	}
+	*/
 	data.player = ft_searstruct(data.map, 'P');
 	data.exit = ft_searstruct(data.map, 'E');
 	mlx_key_hook(data.win_ptr, &handle_input, &data);

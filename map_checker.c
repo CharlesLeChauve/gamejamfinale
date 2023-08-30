@@ -18,8 +18,6 @@ Erreur 501 : map trop petite fdp
 
 */
 
-
-
 int check_rectangle(char **map)
 {
     int i;
@@ -34,35 +32,32 @@ int check_rectangle(char **map)
         i = ft_strlen(map[y]);
         if (i != x)
         {
-            ft_printf("x = %d, y = %d, i = %d\n", x, y, i);
+            ft_printf("Erreur 500 : map non rectangulaire\n");
             return (500);
         }
         i = 0;
         y++;
     }
-    
     if (x < 5 || y < 3)
+    {
+        ft_printf("Erreur 501 : map trop petite\n");
         return (501);
+    }
     return (0);
 }
 
 int ft_errmsg(char **map)
 {
     if (check_rectangle(map) == 500)
-	{
-		ft_printf("Erreur 500 : map non rectangulaire\n");
 		return (1);
-	}
 	else if (check_rectangle(map) == 501)
-	{
-		ft_printf("Erreur 501 : map trop petite\n");
 		return (1);
-	}
     else if (check_walls(map) == 502)
-    {
-        ft_printf("Erreur 502 : la map doit etre entouree de murs\n");
         return (1);
-    }
+    else if (check_elements(map) == 504)
+        return (1);
+    else if (count_elements(map) == 505)
+        return (1);
     else if (ft_cookiz(map) == 0)
     {
         ft_printf("Erreur 503 : Votre jeu ne contient pas de collectibles\n");
@@ -84,25 +79,86 @@ int	ft_tabtabstrlen(char **tab)
 int check_walls(char **map)
 {
     int x;
-    int h;
-    int w;
     int y;
 
     x = 0;
-    h = ft_tabtabstrlen(map);
-    w = ft_strlen(map[0]);
     y = 0;
-    while(map[0][x] && map[h - 1][x])
+    while(map[0][x] && map[ft_tabtabstrlen(map) - 1][x])
     {
-        if ((map[0][x] != '1') || (map[h - 1][x] != '1'))
+        if ((map[0][x] != '1') || (map[ft_tabtabstrlen(map) - 1][x] != '1'))
+        {
+            ft_printf("Erreur 502 : la map doit etre entouree de murs\n");
             return (502);
+        }
         x++;
     }
     while(map[y])
     {
-        if ((map[y][0] != '1') || (map[y][w - 1] != '1'))
+        if ((map[y][0] != '1') || (map[y][ft_strlen(map[0]) - 1] != '1'))
+        {
+            ft_printf("Erreur 502 : la map doit etre entouree de murs\n");
             return (502);
+        }
         y++;
     }
     return (0);
+}
+
+int     count_elements(char **map)
+{
+    int i;
+    int j;
+    int e;
+    int p;
+
+    i = 0;
+    j = 0;
+    p = 0;
+    e = 0;
+
+    while (map[j])
+    {
+        while(map[j][i])
+        {
+            if (map[j][i] == 'E')
+                e++;
+            else if (map[j][i] == 'P')
+                p++;
+            i++;
+        }
+        i = 0;
+        j++;
+    }
+    if (e != 1 || p != 1)
+    {
+        ft_printf("Erreur 505 : trop de players et/ou de sorties sur la carte");
+        return (505);
+    }
+    else
+        return (0);
+}
+
+int     check_elements(char **map)
+{
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    while (map[j])
+    {
+        while (map[j][i])
+        {
+
+            if (map[j][i] != '1' && map[j][i] != '0' && map[j][i] != 'E' && map[j][i] != 'C' && map[j][i] != 'P')
+            {
+                ft_printf("Erreur 504 : Element non compatible sur la carte\n");
+                return (504);
+            }
+            i++;
+        }
+        i = 0;
+        j++;
+    }
+    return(0);
 }

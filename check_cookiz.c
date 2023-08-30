@@ -43,3 +43,4 @@ int    ft_endgame(t_data *data)
     else
         return (0);
 }
+
