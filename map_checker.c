@@ -27,7 +27,7 @@ int check_rectangle(char **map)
     y = 0;
     i = 0;
     x = ft_strlen(map[0]);
-    while (map[y + 1])
+    while (map[y])
     {
         i = ft_strlen(map[y]);
         if (i != x)

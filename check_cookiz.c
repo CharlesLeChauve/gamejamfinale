@@ -39,7 +39,11 @@ int ft_cookiz(char **map)
 int    ft_endgame(t_data *data)
 {
     if ((data->player.posy == data->exit.posy) && (data->player.posx == data->exit.posx) && (ft_cookiz(data->map) == 0))
+    {
+        //ft_freetabtab(data->map);
+       // free(data->mlx_ptr);
         return (1);
+    }
     else
         return (0);
 }
