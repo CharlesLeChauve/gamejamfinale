@@ -34,14 +34,14 @@ int main(int argc, char **argv)
 		ft_ciao(&data);
 		return (0);
 	}
-	else if (ft_pathfinder(&data))
+	data.player = ft_searstruct(data.map, 'P');
+	data.exit = ft_searstruct(data.map, 'E');
+	if (ft_pathfinder(&data))
 	{
-		ft_printf("not all items are reachable\n");
+		ft_printf("Error : not all items are reachable\n");
 		ft_ciao(&data);
 		return(0);
 	}
-	data.player = ft_searstruct(data.map, 'P');
-	data.exit = ft_searstruct(data.map, 'E');
 	mlx_key_hook(data.win_ptr, &handle_input, &data);
 	mlx_loop(data.mlx_ptr);
 	return (0);

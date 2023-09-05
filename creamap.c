@@ -103,7 +103,7 @@ int get_map(char *str, t_data *data)
     total_len = ret;
     data->str = ft_strdup(buf);
     free(buf);
-    data->map = ft_split(data->str, '\n');
+	data->map = ft_split(data->str, '\n');
 	return (total_len);
 }
 

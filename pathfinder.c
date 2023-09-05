@@ -13,34 +13,34 @@
 
 #include    "solong.h"
 
-void    check_right(char **map, int x, int y, t_data *data)
+void    ft_check(char **map, int x, int y, t_data *data)
 {
-    if (map[y][x + 1] != '1') //peut-etre un while
+    if (map[y][x] != '1') 
     {
-        if (map[y][x + 1] == 'E')
+        if (map[y][x] == 'E')
             data->e = 0;
-        if (map[y][x + 1] == 'P')
+        if (map[y][x] == 'P')
             data->p = 0;
-        map[y][x + 1] = '1';
-        x = x + 1;
+        map[y][x] = '1';
         if (data->e == 0 && data->p == 0 && ft_cookiz(map) == 0)
         {
             data->r = 0;
             ft_printf("All items are reachable (bilingue ma gueuuuuuuuuuuuuuuuule)\n");
             return;
         }
-        check_left(map, x - 1, y, data);
-        check_right(map, x + 1, y, data);
-        check_up(map, x, y - 1, data);
-        check_down(map, x, y + 1, data);
+        ft_check(map, x - 1, y, data);
+        ft_check(map, x + 1, y, data);
+        ft_check(map, x, y - 1, data);
+        ft_check(map, x, y + 1, data);
+        return;
     }
     else
         return;
 }
-
+/*
 void    check_left(char **map, int x, int y, t_data *data)
 {
-    if (map[y][x + 1] != '1') //peut-etre un while
+    if (map[y][x - 1] != '1') 
     {
         if (map[y][x - 1] == 'E')
             data->e = 0;
@@ -65,7 +65,7 @@ void    check_left(char **map, int x, int y, t_data *data)
 
 void    check_up(char **map, int x, int y, t_data *data)
 {
-    if (map[y - 1][x] != '1') //peut-etre un while
+    if (map[y - 1][x] != '1') 
     {
         if (map[y - 1][x] == 'E')
             data->e = 0;
@@ -90,7 +90,7 @@ void    check_up(char **map, int x, int y, t_data *data)
 
 void    check_down(char **map, int x, int y, t_data *data)
 {
-    if (map[y + 1][x] != '1') //peut-etre un while
+    if (map[y + 1][x] != '1') 
     {
         if (map[y + 1][x] == 'E')
             data->e = 0;
@@ -113,7 +113,7 @@ void    check_down(char **map, int x, int y, t_data *data)
     else
         return;
 }
-
+*/
 char **ft_tabtabstrdup(char **tab)
 {
     int i;
@@ -135,7 +135,7 @@ int ft_pathfinder(t_data *data)
     int x;
     int y;
     char **map;
-
+   
     x = data->player.posx;
     y = data->player.posy;
     data->e = 1;
@@ -144,10 +144,8 @@ int ft_pathfinder(t_data *data)
 
     // map = data->map; tabtabstrlen et strdup par ligne, ne pas oublier de freetabtab
     map = ft_tabtabstrdup(data->map);
-    check_left(map, x - 1, y, data);
-    check_right(map, x + 1, y, data);
-    check_up(map, x, y - 1, data);
-    check_down(map, x, y + 1, data);
+    ft_check(map, x, y, data);
+    ft_freetabtab(map);
     if (data->r == 0)
         return(0);
     else

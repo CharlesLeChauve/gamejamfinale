@@ -73,7 +73,7 @@ void 	ft_freetabtab(char **map);
 t_player	ft_searstruct(char **map, char c);
 int		ft_searchar(char *str, char c);
 void    ft_ciao(t_data *data);
-void    check_right(char **map, int x, int y, t_data *data);
+void    ft_check(char **map, int x, int y, t_data *data);
 void    check_left(char **map, int x, int y, t_data *data);
 void    check_up(char **map, int x, int y, t_data *data);
 void    check_down(char **map, int x, int y, t_data *data);
