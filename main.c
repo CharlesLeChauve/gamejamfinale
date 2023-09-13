@@ -18,7 +18,8 @@ int main(int argc, char **argv)
 
 	if (argc != 2)
 		return(0);
-	get_map(argv[1], &data);
+	if (get_map(argv[1], &data) == 0)
+		return (0);
 	if (ft_init_all(&data) == 1)
 		return (1);
 	if (ft_errmsg(data.map)!= 0 )

@@ -88,9 +88,17 @@ int get_map(char *str, t_data *data)
     buf = ft_calloc(sizeof(char), (BUFFER_SIZE + 1));
     ret = read(open(str, O_RDONLY), buf, BUFFER_SIZE);
     total_len = ret;
+	if (ret == 0)
+	{
+		free(buf);
+		return (0);
+	}
     data->str = ft_strdup(buf);
     free(buf);
-	data->map = ft_split(data->str, '\n');
+	if (data->str)
+		data->map = ft_split(data->str, '\n');
+	else
+		free(data->str);
 	return (total_len);
 }
 
