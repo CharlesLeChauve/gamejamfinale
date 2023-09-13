@@ -6,7 +6,7 @@
 /*   By: iarrar <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 17:57:16 by iarrar            #+#    #+#             */
-/*   Updated: 2023/08/28 17:57:20 by iarrar           ###   ########.fr       */
+/*   Updated: 2023/09/13 18:14:28 by iarrar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,9 @@ int ft_cookiz(char **map)
 
 int    ft_endgame(t_data *data)
 {
-    if ((data->player.posy == data->exit.posy) && (data->player.posx == data->exit.posx) && (ft_cookiz(data->map) == 0))
-    {
-        //ft_freetabtab(data->map);
-       // free(data->mlx_ptr);
-        return (1);
-    }
+	if ((data->player.posy == data->exit.posy) && 
+    (data->player.posx == data->exit.posx) && (ft_cookiz(data->map) == 0))
+	    return (1);
     else
-        return (0);
+	return (0);
 }
-

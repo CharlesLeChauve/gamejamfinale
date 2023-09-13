@@ -15,8 +15,8 @@
 
 void    ft_check(char **map, int x, int y, t_data *data)
 {
-    // int i;
-    // i = 0;
+    // i = int i;
+    // 0;
     if (map[y][x] != '1') 
     {
         if (map[y][x] == 'E')
@@ -29,13 +29,13 @@ void    ft_check(char **map, int x, int y, t_data *data)
             data->r = 0;
             return;
         }
-        // while (map[i])
+        //  while (map[i])
         // {
         //     ft_printf("%s\n", map[i]);
         //     i++;
         // }
         // usleep(500000);
-        // ft_printf("\033[H\033[J");
+        //ft_printf("\033[H\033[J");
         ft_check(map, x - 1, y, data);
         ft_check(map, x + 1, y, data);
         ft_check(map, x, y - 1, data);

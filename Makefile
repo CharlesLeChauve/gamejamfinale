@@ -13,18 +13,14 @@ FTPRINTF = ./ft_printf/libftprintf.a
 
 MINILIB = ./minilibx-linux/libmlx_Linux.a ./minilibx-linux/libmlx.a
 
-#MINILIB2 = ./minilibx-linux/libmlx.a
-
 SRCS = main.c mouvements.c check_cookiz.c map_checker.c creamap.c pathfinder.c graph_part.c
 
 CC = gcc
 
 all: $(NAME)
 
-$(NAME):	$(OBJ)
+$(NAME):	
 	make -C ./minilibx-linux
-	make -C ./libft
-#	make -C ./ft_printf
 	$(CC) $(FLAGS) $(SRCS) $(LIBFT) $(MINILIB) $(FTPRINTF) -o $(NAME) $(LIB_FLAGS)
 	
 clean:

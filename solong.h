@@ -51,11 +51,14 @@ typedef struct s_data
 	void		*win_ptr;
 	t_player 	player;
 	t_player	exit;
+	t_player	exit_close;
+	t_player	exit_open;
 	t_player	wall;
 	t_player	font;
 	t_player	cookie;
 	char		*str;
 	char		**map;
+	int			count;
 	int			dimension;
 	int			map_height;
 	int			map_width;
@@ -107,6 +110,8 @@ t_data		ft_ignition(int fd);
 t_player	ft_searstruct(char **map, char c);
 void    ft_init_img(t_data *data);
 int ft_coordonnees(int x, t_data *data);
+void	free_image(t_data *data);
+int	ft_init_all(t_data *data);
 
 
 
