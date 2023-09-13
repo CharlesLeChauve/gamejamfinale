@@ -61,22 +61,17 @@ int	handle_input(int keysym, t_data *data)
 	int i;
 
 	i = 0;
+	
     if (keysym == XK_a)
-	{
         move_left(data);
-	}
-	if (keysym == XK_s)
-	{
+	else if (keysym == XK_s)
         move_down(data);
-	}
-	if (keysym == XK_w)
-    {
+	else if (keysym == XK_w)
 		move_up(data);
-	}
-	if (keysym == XK_d)
-	{
-        move_right(data);   
-	}
+	else if (keysym == XK_d)
+        move_right(data);  
+ 
+	put_image(data);
 	ft_printf("\033[H\033[J");
 	while (data->map[i])
 	{

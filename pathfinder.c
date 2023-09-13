@@ -15,6 +15,8 @@
 
 void    ft_check(char **map, int x, int y, t_data *data)
 {
+    // int i;
+    // i = 0;
     if (map[y][x] != '1') 
     {
         if (map[y][x] == 'E')
@@ -25,9 +27,15 @@ void    ft_check(char **map, int x, int y, t_data *data)
         if (data->e == 0 && data->p == 0 && ft_cookiz(map) == 0)
         {
             data->r = 0;
-            ft_printf("All items are reachable (bilingue ma gueuuuuuuuuuuuuuuuule)\n");
             return;
         }
+        // while (map[i])
+        // {
+        //     ft_printf("%s\n", map[i]);
+        //     i++;
+        // }
+        // usleep(500000);
+        // ft_printf("\033[H\033[J");
         ft_check(map, x - 1, y, data);
         ft_check(map, x + 1, y, data);
         ft_check(map, x, y - 1, data);
@@ -37,83 +45,7 @@ void    ft_check(char **map, int x, int y, t_data *data)
     else
         return;
 }
-/*
-void    check_left(char **map, int x, int y, t_data *data)
-{
-    if (map[y][x - 1] != '1') 
-    {
-        if (map[y][x - 1] == 'E')
-            data->e = 0;
-        if (map[y][x - 1] == 'P')
-            data->p = 0;
-        map[y][x - 1] = '1';
-        x = x - 1;
-        if (data->e == 0 && data->p == 0 && ft_cookiz(map) == 0)
-        {
-            data->r = 0;
-            ft_printf("All items are reachable (bilingue ma gueuuuuuuuuuuuuuuuule)\n");
-            return;
-        }
-        check_left(map, x - 1, y, data);
-        check_right(map, x + 1, y, data);
-        check_up(map, x, y - 1, data);
-        check_down(map, x, y + 1, data);
-    }
-    else
-        return;
-}
 
-void    check_up(char **map, int x, int y, t_data *data)
-{
-    if (map[y - 1][x] != '1') 
-    {
-        if (map[y - 1][x] == 'E')
-            data->e = 0;
-        if (map[y - 1][x] == 'P')
-            data->p = 0;
-        map[y - 1][x] = '1';
-        y = y - 1;
-        if (data->e == 0 && data->p == 0 && ft_cookiz(map) == 0)
-        {
-            data->r = 0;
-            ft_printf("All items are reachable (bilingue ma gueuuuuuuuuuuuuuuuule)\n");
-            return;
-        }
-        check_left(map, x - 1, y, data);
-        check_right(map, x + 1, y, data);
-        check_up(map, x, y - 1, data);
-        check_down(map, x, y + 1, data);
-    }
-    else
-        return;
-}
-
-void    check_down(char **map, int x, int y, t_data *data)
-{
-    if (map[y + 1][x] != '1') 
-    {
-        if (map[y + 1][x] == 'E')
-            data->e = 0;
-        if (map[y + 1][x] == 'P')
-            data->p = 0;
-        map[y + 1][x] = '1';
-        y = y + 1;
-        if (data->e == 0 && data->p == 0 && ft_cookiz(map) == 0)
-        {
-            
-            data->r = 0;
-            ft_printf("All items are reachable (bilingue ma gueuuuuuuuuuuuuuuuule)\n");
-            return;
-        }
-        check_left(map, x - 1, y, data);
-        check_right(map, x + 1, y, data);
-        check_up(map, x, y - 1, data);
-        check_down(map, x, y + 1, data);
-    }
-    else
-        return;
-}
-*/
 char **ft_tabtabstrdup(char **tab)
 {
     int i;
@@ -129,7 +61,6 @@ char **ft_tabtabstrdup(char **tab)
     return(dest);
 }
 
-
 int ft_pathfinder(t_data *data)
 {
     int x;
@@ -142,7 +73,6 @@ int ft_pathfinder(t_data *data)
     data->p = 1;
     data->r = 1;
 
-    // map = data->map; tabtabstrlen et strdup par ligne, ne pas oublier de freetabtab
     map = ft_tabtabstrdup(data->map);
     ft_check(map, x, y, data);
     ft_freetabtab(map);

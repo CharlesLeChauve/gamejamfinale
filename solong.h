@@ -24,11 +24,26 @@
 # include "./ft_printf/ft_printf.h"
 # include "./libft/libft.h"
 
+#define DIMENSION 50
+
+typedef struct s_imge
+{
+    void	*mlx_img;
+    char	*addr;
+    int		bpp; /* bits per pixel */
+    int		line_len;
+    int		endian;
+}	t_imge;
+
 typedef struct s_player
 {
-	int posx;
-	int	posy;
+	int 	posx;
+	int		posy;
+	int		posmapx;
+	int		posmapy;
+	t_imge	sprite;
 }	t_player;
+
 
 typedef struct s_data
 {
@@ -36,10 +51,16 @@ typedef struct s_data
 	void		*win_ptr;
 	t_player 	player;
 	t_player	exit;
+	t_player	wall;
+	t_player	font;
+	t_player	cookie;
 	char		*str;
 	char		**map;
-	int			h;
-	int			w;
+	int			dimension;
+	int			map_height;
+	int			map_width;
+	int			win_height;
+	int			win_width;
 	int			e;
 	int			p;
 	int			r;
@@ -47,38 +68,46 @@ typedef struct s_data
 
 typedef struct s_map
 {
-	char **map;
+	char	**map;
+	int		map_height;
+	int		map_width;
 }	t_map;
 
 
-char	*get_str(int total, int fd);
-int		ft_maping(int fd, t_data *data);
-int		move_left(t_data *data);
-int		move_right(t_data *data);
-int		move_up(t_data *data);
-int		move_down(t_data *data);
-int		ft_cookiz(char **map);
-int		check_rectangle(char **map);
-int		ft_errmsg(char **map);
-int		ft_tabtabstrlen(char **tab);
-int		check_walls(char **map);
-int		ft_endgame(t_data *data);
-int     check_elements(char **map);
-int     count_elements(char **map);
-void	ft_freetabtab(char **map);
-t_data	ft_ignition(int fd);
-int 	get_map(char *str, t_data *data);
-int		handle_input(int keysym, t_data *data);
-void 	ft_freetabtab(char **map);
+char		*get_str(int total, int fd);
+char		**ft_tabtabstrdup(char **tab);
+int			ft_maping(int fd, t_data *data);
+int			move_left(t_data *data);
+int			move_right(t_data *data);
+int			move_up(t_data *data);
+int			move_down(t_data *data);
+int			ft_cookiz(char **map);
+int			check_rectangle(char **map);
+int			ft_errmsg(char **map);
+int			ft_tabtabstrlen(char **tab);
+int			check_walls(char **map);
+int			ft_pathfinder(t_data *data);
+int			ft_endgame(t_data *data);
+int   		check_elements(char **map);
+int   		count_elements(char **map);
+int			ft_searchar(char *str, char c);
+int			get_map(char *str, t_data *data);
+int			handle_input(int keysym, t_data *data);
+//int			*ft_dimension(t_data *data);	
+void		ft_freetabtab(char **map);
+void 		ft_freetabtab(char **map);
+void    	ft_ciao(t_data *data);
+void    	ft_check(char **map, int x, int y, t_data *data);
+void    	check_left(char **map, int x, int y, t_data *data);
+void    	check_up(char **map, int x, int y, t_data *data);
+void    	check_down(char **map, int x, int y, t_data *data);
+void    	ft_dimension(t_data *data);
+void		put_image(t_data *data);
+t_data		ft_ignition(int fd);
 t_player	ft_searstruct(char **map, char c);
-int		ft_searchar(char *str, char c);
-void    ft_ciao(t_data *data);
-void    ft_check(char **map, int x, int y, t_data *data);
-void    check_left(char **map, int x, int y, t_data *data);
-void    check_up(char **map, int x, int y, t_data *data);
-void    check_down(char **map, int x, int y, t_data *data);
-char **ft_tabtabstrdup(char **tab);
-int ft_pathfinder(t_data *data);
+void    ft_init_img(t_data *data);
+int ft_coordonnees(int x, t_data *data);
+
 
 
 

@@ -15,7 +15,6 @@
 /*codes d'erreurs
 Erreur 500 : map non rectangulaire fdp
 Erreur 501 : map trop petite fdp
-
 */
 
 int check_rectangle(char **map)
@@ -38,7 +37,7 @@ int check_rectangle(char **map)
         i = 0;
         y++;
     }
-    if (x < 5 || y < 3)
+    if ((x <= 5 && y <= 3) || (x <= 3 && y <= 5))
     {
         ft_printf("Erreur 501 : map trop petite\n");
         return (501);
@@ -131,7 +130,7 @@ int     count_elements(char **map)
     }
     if (e != 1 || p != 1)
     {
-        ft_printf("Erreur 505 : trop de players et/ou de sorties sur la carte");
+        ft_printf("Erreur 505 : nombre de player/sortie sur la carte invalide\n");
         return (505);
     }
     else
@@ -162,3 +161,11 @@ int     check_elements(char **map)
     }
     return(0);
 }
+
+// void    ft_dimension(t_data *data)
+// {
+//     data->map_height = ft_tabtabstrlen(data->map);
+//     data->map_width = ft_strlen(data->map[0]);
+//     ft_printf("h = %d\ne = %d\n", data->map_height, data->map_width);
+// }
+
