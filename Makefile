@@ -13,7 +13,7 @@ FTPRINTF = ./ft_printf/libftprintf.a
 
 MINILIB = ./minilibx-linux/libmlx_Linux.a ./minilibx-linux/libmlx.a
 
-SRCS = main.c mouvements.c check_cookiz.c map_checker.c creamap.c pathfinder.c graph_part.c
+SRCS = main.c mouvements.c check_cookiz.c map_checker.c creamap.c pathfinder.c graph_part.c put_image.c
 
 CC = gcc
 
