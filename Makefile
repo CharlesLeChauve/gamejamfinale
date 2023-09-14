@@ -25,9 +25,9 @@ $(NAME):
 	
 clean:
 	rm -f *.o
-	make clean -C ./minilibx-linux
 	make clean -C ./libft
 	make clean -C ./ft_printf
+	make clean -C ./minilibx-linux
 
 fclean: clean
 	rm $(NAME)

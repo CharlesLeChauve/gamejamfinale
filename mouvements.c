@@ -20,6 +20,7 @@ int	move_left(t_data *data)
 		data->map[data->exit.posy][data->exit.posx] = 'E';
 		data->map[data->player.posy][data->player.posx - 1] = 'P';
 		data->player.posx--;
+		data->count ++;
 		return (1);
 	}
 	else
@@ -34,6 +35,7 @@ int	move_right(t_data *data)
 		data->map[data->exit.posy][data->exit.posx] = 'E';
 		data->map[data->player.posy][data->player.posx + 1] = 'P';
 		data->player.posx++;
+		data->count ++;
 		return (1);
 	}
 	else
@@ -48,6 +50,7 @@ int	move_up(t_data *data)
 		data->map[data->exit.posy][data->exit.posx] = 'E';
 		data->map[data->player.posy - 1][data->player.posx] = 'P';
 		data->player.posy--;
+		data->count ++;
 		return (1);
 	}
 	else
@@ -62,6 +65,7 @@ int	move_down(t_data *data)
 		data->map[data->exit.posy][data->exit.posx] = 'E';
 		data->map[data->player.posy + 1][data->player.posx] = 'P';
 		data->player.posy++;
+		data->count ++;
 		return (1);
 	}
 	else

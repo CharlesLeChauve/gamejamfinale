@@ -68,7 +68,6 @@ int	handle_input(int keysym, t_data *data)
 		move_right(data);
 	put_image(data);
 	ft_printf("\033[H\033[J");
-	data->count ++;
 	ft_printf("total moves = %d\n", data->count);
 	if (ft_endgame(data) == 1 || keysym == XK_Escape)
 	{
