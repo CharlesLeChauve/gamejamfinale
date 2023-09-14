@@ -44,7 +44,7 @@ int	ft_endgame(t_data *data)
 		return (0);
 }
 
-int check_extension(char *str)
+int	check_extension(char *str)
 {
 	if (ft_strlen(str) < 4)
 	{
