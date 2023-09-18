@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"libft.h"
+#include "libft.h"
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
@@ -27,4 +27,4 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 	if (size >= 1)
 		dest[i] = '\0';
 	return (res);
-}	
+}

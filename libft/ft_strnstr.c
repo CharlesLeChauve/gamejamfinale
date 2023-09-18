@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"libft.h"
+#include "libft.h"
 
 char	*ft_strnstr(const char *big, const char *lit, size_t len)
 {
 	size_t	i;
 	char	*big1;
-	
-	big1 = (char*)big;
+
+	big1 = (char *)big;
 	i = 0;
 	if (!big && !lit)
 		return (NULL);
@@ -25,7 +25,7 @@ char	*ft_strnstr(const char *big, const char *lit, size_t len)
 		return (big1);
 	if (ft_strlen(lit) > len)
 		return (NULL);
-	while (big[i] && i <= (len - ft_strlen(lit))) 
+	while (big[i] && i <= (len - ft_strlen(lit)))
 	{
 		if (!ft_strncmp(&big[i], lit, ft_strlen(lit)))
 			return (&big1[i]);
