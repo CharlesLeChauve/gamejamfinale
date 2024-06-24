@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_image.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iarrar <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tgibert <tgibert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 12:31:39 by iarrar            #+#    #+#             */
-/*   Updated: 2023/09/14 12:31:41 by iarrar           ###   ########.fr       */
+/*   Updated: 2024/06/24 12:07:52 by tgibert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_choose_img(char c, t_data *data, int x, int y)
 	{
 		if (ft_cookiz(data->map) != 0)
 			mlx_put_image_to_window(data->mlx_ptr,
-				data->win_ptr, data->exit_close.sprite.mlx_img,
+				data->win_ptr, data->cookie.sprite.mlx_img,
 				ft_crdn(x, data), ft_crdn(y, data));
 		else
 			mlx_put_image_to_window(data->mlx_ptr,

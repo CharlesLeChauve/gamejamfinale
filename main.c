@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iarrar <iarrar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tgibert <tgibert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:45:32 by iarrar            #+#    #+#             */
-/*   Updated: 2023/08/28 15:13:50 by iarrar           ###   ########.fr       */
+/*   Updated: 2024/06/24 11:31:26 by tgibert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	put_image(&data);
+	mlx_do_key_autorepeatoff(data.mlx_ptr);
 	mlx_key_hook(data.win_ptr, &handle_input, &data);
 	mlx_hook(data.win_ptr, 17, KeyPressMask, &ft_ciao, &data);
 	mlx_loop(data.mlx_ptr);
