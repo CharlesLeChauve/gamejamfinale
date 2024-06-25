@@ -34,7 +34,7 @@ t_player	ft_searstruct(char **map, char c)
 
 	cacahuete.posx = -1;
 	cacahuete.posy = 0;
-	while (cacahuete.posx == -1)
+	while (cacahuete.posx == -1 && map[cacahuete.posy])
 	{
 		cacahuete.posx = ft_searchar(map[cacahuete.posy], c);
 		cacahuete.posy++;
@@ -56,6 +56,8 @@ void	ft_freetabtab(char **map)
 	free(map);
 }
 
+
+
 int	handle_input(int keysym, t_data *data)
 {
 	if (keysym == XK_a)
@@ -66,7 +68,7 @@ int	handle_input(int keysym, t_data *data)
 		move_up(data);
 	else if (keysym == XK_d)
 		move_right(data);
-	put_image(data);
+	put_image(data, 0);
 	ft_printf("\033[H\033[J");
 	ft_printf("total moves = %d\n", data->count);
 	if (ft_endgame(data) == 1 || keysym == XK_Escape)

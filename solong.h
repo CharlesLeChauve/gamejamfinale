@@ -49,12 +49,15 @@ typedef struct s_data
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_player	player;
+	t_player	player_left;
 	t_player	exit;
 	t_player	exit_close;
 	t_player	exit_open;
 	t_player	wall;
 	t_player	font;
 	t_player	cookie;
+	t_player	black;
+	t_player	jumpscare;
 	char		*str;
 	char		**map;
 	int			count;
@@ -66,6 +69,7 @@ typedef struct s_data
 	int			e;
 	int			p;
 	int			r;
+	int		direction;
 }	t_data;
 
 typedef struct s_map
@@ -102,7 +106,7 @@ void		check_left(char **map, int x, int y, t_data *data);
 void		check_up(char **map, int x, int y, t_data *data);
 void		check_down(char **map, int x, int y, t_data *data);
 void		ft_dimension(t_data *data);
-void		put_image(t_data *data);
+void		put_image(t_data *data, int ctrl);
 t_data		ft_ignition(int fd);
 t_player	ft_searstruct(char **map, char c);
 void		ft_init_img(t_data *data);

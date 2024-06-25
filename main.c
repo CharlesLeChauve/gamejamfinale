@@ -16,6 +16,7 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
+	data.direction = 0;
 	if (argc != 2 || check_extension(argv[1]) == 0)
 		return (0);
 	if (get_map(argv[1], &data) == 0)
@@ -33,7 +34,8 @@ int	main(int argc, char **argv)
 		ft_ciao(&data);
 		return (0);
 	}
-	put_image(&data);
+	ft_init_img(&data);
+	put_image(&data, 0);
 	mlx_do_key_autorepeatoff(data.mlx_ptr);
 	mlx_key_hook(data.win_ptr, &handle_input, &data);
 	mlx_hook(data.win_ptr, 17, KeyPressMask, &ft_ciao, &data);

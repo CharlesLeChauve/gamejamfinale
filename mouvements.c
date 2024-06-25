@@ -14,6 +14,8 @@
 
 int	move_left(t_data *data)
 {
+	if (data->direction == 0)
+		data->direction = 1;
 	if (data->map[data->player.posy][data->player.posx - 1] != '1')
 	{
 		data->map[data->player.posy][data->player.posx] = '0';
@@ -29,6 +31,8 @@ int	move_left(t_data *data)
 
 int	move_right(t_data *data)
 {
+	if (data->direction == 1)
+		data->direction = 0;
 	if (data->map[data->player.posy][data->player.posx + 1] != '1')
 	{
 		data->map[data->player.posy][data->player.posx] = '0';

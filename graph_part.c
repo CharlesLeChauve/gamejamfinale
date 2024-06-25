@@ -32,28 +32,42 @@ void	ft_init_img(t_data *data)
 	int	img_height;
 	int	img_width;
 
+	data->jumpscare.sprite.mlx_img = mlx_xpm_file_to_image
+		(data->mlx_ptr, "./img/so_coquette.xpm", &img_height, &img_width);
+	data->player_left.sprite.mlx_img = mlx_xpm_file_to_image
+		(data->mlx_ptr, "./img/lapin_mechant_left.xpm", &img_height, &img_width);
+	data->black.sprite.mlx_img = mlx_xpm_file_to_image
+		(data->mlx_ptr, "./img/black_image.xpm", &img_height, &img_width);
 	data->player.sprite.mlx_img = mlx_xpm_file_to_image
-		(data->mlx_ptr, "./img/loup.xpm", &img_height, &img_width);
+		(data->mlx_ptr, "./img/lapin_mechant.xpm", &img_height, &img_width);
 	data->wall.sprite.mlx_img = mlx_xpm_file_to_image
 		(data->mlx_ptr, "./img/font.xpm", &img_height, &img_width);
 	data->font.sprite.mlx_img = mlx_xpm_file_to_image
-		(data->mlx_ptr, "./img/gazon.xpm", &img_height, &img_width);
+		(data->mlx_ptr, "./img/pink_grass.xpm", &img_height, &img_width);
 	data->exit_open.sprite.mlx_img = mlx_xpm_file_to_image
 		(data->mlx_ptr, "./img/exit_open.xpm", &img_height, &img_width);
 	data->exit_close.sprite.mlx_img = mlx_xpm_file_to_image
 		(data->mlx_ptr, "./img/exit_close.xpm", &img_height, &img_width);
 	data->cookie.sprite.mlx_img = mlx_xpm_file_to_image
-		(data->mlx_ptr, "./img/mouton.xpm", &img_height, &img_width);
+		(data->mlx_ptr, "./img/gentil_loup.xpm", &img_height, &img_width);
 }
 
-void	put_image(t_data *data)
+
+void	scream(t_data *data)
+{
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+		data->jumpscare.sprite.mlx_img, 0, 0);
+		mlx_do_sync(data->mlx_ptr);
+	usleep(1000000);
+}
+
+void	put_image(t_data *data, int ctrl)
 {
 	int	x;
 	int	y;
 
 	x = 0;
 	y = 0;
-	ft_init_img(data);
 	while (data->map[y])
 	{
 		while (data->map[y][x])
@@ -64,11 +78,18 @@ void	put_image(t_data *data)
 		x = 0;
 		y++;
 	}
-	free_image(data);
+	if (!ft_cookiz(data->map) && data->player.posx == data->jumpscare.posx && data->player.posy == data->jumpscare.posy && ctrl == 0)
+	{
+		scream(data);
+		put_image(data, 1);
+	}
+
 }
 
 void	free_image(t_data *data)
 {
+	mlx_destroy_image(data->mlx_ptr, data->jumpscare.sprite.mlx_img);
+	mlx_destroy_image(data->mlx_ptr, data->black.sprite.mlx_img);
 	mlx_destroy_image(data->mlx_ptr, data->player.sprite.mlx_img);
 	mlx_destroy_image(data->mlx_ptr, data->cookie.sprite.mlx_img);
 	mlx_destroy_image(data->mlx_ptr, data->wall.sprite.mlx_img);
